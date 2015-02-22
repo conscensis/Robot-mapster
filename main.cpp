@@ -11,7 +11,8 @@ const float Distwheel= 14;  // расстояние между колсами
 const float TimewheelR = 1;  // об/сек
 const float TimewheelL = 1;  // об/сек
 const float Radian = 57.2957795; //1 рад = 57.2957795 градусов
-float points[10][361];
+float points[10][361];      //массив для хранения окружащих робота по окрожности, 10 окружностей по 361 точки
+float pointsOfRobot[10][2];    //массив для хранения местоположения робота во время сканирования точек соответсвующего по 1 массив точек = 1 массив координат
 
 
 
@@ -40,10 +41,13 @@ float getLength()
 }
 float getDistancePoints(int z)
 {
-    for(int i=0;i<=361;i++)            //крутим робота по 1 градусу 360 градусов
+    for(int i=0;i<361;i++)            //крутим робота по 1 градусу 360 градусов
     {                                  //и пишем в массив расстояние
         setDegree(i);
         points[z][i]=getDistance();
+        pointsOfRobot[z][0]=degree;
+        pointsOfRobot[z][1]=length;
+
     }
 }
 
@@ -130,5 +134,3 @@ r.setCoordinate(30,36); // пройдет расстояние 30 см под у
 
 
 }
-
-
